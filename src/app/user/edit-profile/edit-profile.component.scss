@@ -1,0 +1,29 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+
+  .avatar {
+    max-height: 100px;
+  }
+
+  mat-form-field,
+  .controls {
+    width: 300px;
+  }
+
+  .controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .error {
+    margin: 15px;
+    font-size: 1.2rem;
+    color: #f90c0c;
+    font-weight: 600;
+  }
+}

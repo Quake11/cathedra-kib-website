@@ -1,0 +1,54 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!(user$ | async)"></mat-progress-bar>
+<form (ngSubmit)="onSubmit()" [formGroup]="userForm" *ngIf="user$ | async as user">
+
+  <img [src]="user.photoURL ? user.photoURL : 'assets/no-avatar.svg'" class="avatar">
+
+
+  <mat-form-field>
+    <mat-label>Ссылка на аватар</mat-label>
+    <input matInput [formControl]="photoURL" [readonly]="saving" spellcheck="false" autocomplete="off" autocorrect="off"
+      autocapitalize="off">
+  </mat-form-field>
+
+  <img *ngIf="photoURL.dirty && photoURL.value" [src]="photoURL.value" class="avatar">
+
+  <mat-form-field>
+    <mat-label>Никнейм</mat-label>
+    <input matInput [formControl]="displayName" [readonly]="saving">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Фамилия</mat-label>
+    <input matInput [formControl]="lastname" [readonly]="saving">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Имя</mat-label>
+    <input matInput [formControl]="firstname" [readonly]="saving">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Отчество</mat-label>
+    <input matInput [formControl]="middlename" [readonly]="saving">
+  </mat-form-field>
+
+
+  <app-ngx-editor placeholder="Расскажите о себе" [spellcheck]="true" [formControl]="description" height="200px"
+    [editable]="!saving"></app-ngx-editor>
+
+  <mat-progress-bar mode="query" *ngIf="saving"></mat-progress-bar>
+
+  <div class="controls">
+    <a mat-button [routerLink]="saving ? null : '..'" [disabled]="saving">
+      Назад
+    </a>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="userForm.pristine || !userForm.valid || !hasName() || saving">
+      Сохранить
+    </button>
+  </div>
+  <p class="mat-caption" style="color: #d81717;font-size: 1.3rem;" *ngIf="!hasName()">Необходимо ввести никнейм либо
+    имя</p>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+</form>

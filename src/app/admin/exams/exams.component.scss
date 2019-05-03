@@ -1,0 +1,25 @@
+:host {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    max-width: 90vw;
+    margin: 15px;
+  }
+
+  .exams {
+    margin: 15px;
+  }
+}

@@ -1,0 +1,30 @@
+<div *ngIf="userProfile$ | async as user" class="wrapper">
+  <img [src]="user.photoURL ? user.photoURL : 'assets/no-avatar.svg'" class="avatar">
+
+  <h3 class="mat-subheading-2 name">{{ getName(user) }}
+    <mat-icon *ngIf="user.confirmed === true" matTooltip="Подтверждённый пользователь" style="color: #4956c7;margin: 0 10px;">
+      check_circle_outline</mat-icon>
+  </h3>
+
+  <app-presence [uid]="user.uid"></app-presence>
+
+  <ng-container *ngIf="user.roles">
+    <mat-chip-list>
+      <ng-container *ngFor="let role of user.roles | keyvalue">
+        <mat-chip color="primary" selected *ngIf="role.value">
+          {{ getRoleName(role.key) }}
+        </mat-chip>
+      </ng-container>
+    </mat-chip-list>
+  </ng-container>
+
+  <p class="mat-body-1" *ngIf="(!user.description || user.description==='<br>'); else description;">
+    <i>Пользователь пока не добавил информацию о себе</i>
+  </p>
+
+  <ng-template #description>
+    <p class="mat-body-1" *ngIf="user.description" [innerHtml]="user.description"></p>
+  </ng-template>
+
+  <a mat-stroked-button color="primary" *ngIf="user.uid === (user$ | async)?.uid" routerLink="/profile/edit">Редактировать</a>
+</div>

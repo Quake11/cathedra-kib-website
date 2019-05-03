@@ -1,0 +1,13 @@
+<div class="programs">
+  <a *ngFor="let program of programs$ | async" class="program" [routerLink]="program.id">
+    <h3 class="mat-h3">{{ program.name }}</h3>
+    <h4 class="mat-h4">Бюджетных мест: {{ program.places }}</h4>
+  </a>
+
+  <a class="program add" routerLink="create">
+    <span>+</span>
+    <h3>Добавить программу</h3>
+  </a>
+</div>
+
+<router-outlet></router-outlet>

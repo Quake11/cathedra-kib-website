@@ -1,0 +1,4 @@
+<strong>Группа {{ group.name }}</strong> (Студентов: {{ studentsCount$ | async }})
+<button mat-stroked-button color="warn" appHoldable (holdTime)="deleteGroup($event, group.uid)">Удалить группу</button>
+<mat-progress-bar *ngIf="progress" class="example-margin" color="warn" mode="determinate" [value]="progress">
+</mat-progress-bar>

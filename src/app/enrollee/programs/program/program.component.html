@@ -1,0 +1,100 @@
+<ng-container *ngIf="preview; else program">
+  <div *ngIf="preview as program">
+    <section id="head" [style.background]="program.backgroundColor | safe: 'style'">
+      <img *ngIf="program.imgLogo" [src]="program.imgLogo?.url">
+      <div class="title">
+        <h1 *ngIf="program.name" class="mat-headline" [style.color]="program.fontColor">{{ program.name }}</h1>
+        <h3 *ngIf="program.subtitle" class="mat-subheading-2" [style.color]="program.fontColor">{{ program.subtitle }}</h3>
+        <h3 *ngIf="program.places" class="mat-subheading-2" [style.color]="program.fontColor">
+          Бюджетных мест на {{ year }} год: {{ program.places }}</h3>
+      </div>
+    </section>
+  </div>
+</ng-container>
+
+
+<ng-template #program>
+  <div *ngIf="program$ | async as program" class="program">
+    <section id="head" [style.background]="program.backgroundColor | safe: 'style'">
+      <img *ngIf="program.imgLogo" [src]="program.imgLogo?.url" @fadeInFromLeftSlow>
+      <div class="title" @fadeInFromTop>
+        <h1 class="mat-headline" [style.color]="program.fontColor">{{ program.name }}</h1>
+        <h3 class="mat-subheading-2" [style.color]="program.fontColor">{{ program.subtitle }}</h3>
+        <h3 class="mat-subheading-2" [style.color]="program.fontColor">
+          Бюджетных мест на {{ year }} год: {{ program.places }}
+        </h3>
+      </div>
+    </section>
+
+    <h2>Кем смогу стать?</h2>
+    <div class="cards">
+      <mat-card>
+        <img mat-card-image src="assets/professions/1.png">
+        <mat-card-title>
+          Менеджер непрерывности бизнеса
+        </mat-card-title>
+        <mat-card-content>
+          Специалист, который обеспечивает бесперебойность бизнес-процессов при возникновении проблем или отключении
+          ИТ-систем предприятия вследствие кибератак, программных ошибок, техногенных катастроф, влияющих на работу
+          Сети
+          и других форс-мажорных ситуаций.
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <img mat-card-image src="assets/professions/2.png">
+        <mat-card-title>
+          Дизайнер-эргономист носимых устройств для безопасности
+        </mat-card-title>
+        <mat-card-content>
+          Специалист, который занимается разработкой гаджетов, позволяющих обеспечить повышенную безопасность
+          пользователя в чрезвычайной ситуации. Для этой профессии нужно гармоничное сочетание здравого смысла и
+          фантазии, ведь
+          решать проблемы самообороны можно по-разному.
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <img mat-card-image src="assets/professions/3.png">
+        <mat-card-title>
+          Проектировщик личной безопасности
+        </mat-card-title>
+        <mat-card-content>
+          Специалист, оценивающий и проектирующий жизнь человека с точки зрения всех возможных рисков (от генетической
+          предрасположенности к определенным заболеваниям до вероятности аварий того, что человек станет жертвой
+          преступления) и их предотвращения.
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <h2>Чему научусь?</h2>
+    <div skillsComponent [skills]="program.skills" [practices]="program.practices" [modules]="program.modules" @fadeIn></div>
+
+
+    <h2>Наши выпускники</h2>
+    <div class="graduates">
+      <ng-container *ngFor="let graduate of graduates; let i = index;">
+        <div class="graduate" *ngIf="i === currentGraduate" @fadeInGraduate>
+          <img [src]="graduate.photoUrl">
+          <h3 class="name">{{ graduate.name }}</h3>
+          <h4 class="job">{{ graduate.job }}</h4>
+          <h4 class="post">{{ graduate.post }}</h4>
+          <h4 class="comment">"{{ graduate.comment }}"</h4>
+        </div>
+      </ng-container>
+      <div class="controls">
+        <button mat-icon-button (click)="changeSlide(-1)">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button mat-icon-button (click)="changeSlide(1)">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+
+      <button mat-raised-button class="cta">Хочу здесь учиться</button>
+    </div>
+
+
+
+  </div>
+</ng-template>

@@ -1,0 +1,22 @@
+<ng-container *ngIf="item">
+  <div class="wrapper" @fadeInOut>
+    <a [routerLink]="'/event/' + item.id">
+      <strong>{{ item.title }}</strong>
+    </a>
+
+    <p class="mat-caption date">
+      {{ getDate(item.publicationDate) }}
+    </p>
+
+    <p class="mat-body-1" style="margin-top: 5px" [innerHTML]="item.description">
+    </p>
+
+    <div class="controls">
+      <a mat-stroked-button [routerLink]="item.id" color="primary">Редактировать</a>
+      <button mat-stroked-button color="warn" appHoldable (holdTime)="deleteEvent($event, item.id)">Удалить событие</button>
+
+    </div>
+    <mat-progress-bar *ngIf="progress" class="example-margin" color="warn" mode="determinate" [value]="progress">
+    </mat-progress-bar>
+  </div>
+</ng-container>

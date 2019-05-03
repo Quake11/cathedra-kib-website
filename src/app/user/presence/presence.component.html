@@ -1,0 +1,13 @@
+<ng-container *ngIf="presence$ | async as presence">
+  <div [ngSwitch]="presence.status" class="status">
+    <div *ngSwitchCase="'online'" style="color: rgb(8, 226, 26);font-size: 20px;">
+      💚 Онлайн
+    </div>
+    <div *ngSwitchCase="'offline'" style="color: rgb(204, 10, 10);font-size: 20px;">
+      🔴 Оффлайн
+    </div>
+    <div *ngSwitchCase="'away'" style="color: rgb(255, 139, 16);font-size: 20px;">
+      💤 Отсутствует
+    </div>
+  </div>
+</ng-container>

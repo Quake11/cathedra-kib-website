@@ -1,0 +1,88 @@
+<div [hidden]="confirmationResult" id="recaptcha-container"></div>
+
+<mat-horizontal-stepper linear="true" #stepper>
+  <mat-step [stepControl]="phoneForm">
+    <form [formGroup]="phoneForm">
+      <ng-template matStepLabel>Ввод номера телефона</ng-template>
+      <mat-form-field>
+        <span matPrefix>+7 &nbsp;</span>
+        <input type="tel" matInput placeholder="Номер телефона" formControlName="phone" maxlength="10" autocomplete="off"
+          required>
+      </mat-form-field>
+
+      <div class="controls">
+        <button mat-dialog-close mat-button color="primary">Отмена</button>
+        <button *ngIf="!confirmationResult" mat-raised-button color="primary" (click)="sendLoginCode(phoneForm.value.phone)"
+          matStepperNext>Далее</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="confirmForm">
+    <form [formGroup]="confirmForm" *ngIf="!verifying">
+      <ng-template matStepLabel>Подтверждение</ng-template>
+      <mat-form-field>
+        <input type="text" autocomplete="off" matInput placeholder="Код из СМС" formControlName="verificationCode"
+          mat-raised-button color="primary" required>
+      </mat-form-field>
+      <div *ngIf="error">
+        <p class="mat-body-1" style="color:crimson">{{ error }}</p>
+        <p class="mat-body-1" *ngIf="errorCount > 0">Осталось попыток:
+          <strong>{{ maxErrorCount - errorCount }}</strong>
+        </p>
+      </div>
+      <div class="controls">
+        <button mat-button (click)="verifyCode(confirmForm.value.verificationCode)">Подтвердить</button>
+      </div>
+    </form>
+
+    <mat-spinner *ngIf="verifying"></mat-spinner>
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+<!--
+<div class="wrapper">
+  <h2 mat-dialog-title>Вход с помощью телефона </h2>
+  <ng-container *ngIf="!confirmationResult; then enter else confirm">
+  </ng-container>
+  <div [hidden]="confirmationResult" id="recaptcha-container"></div>
+
+  <ng-container *ngIf="!confirmationResult; then buttonsEnter else buttonsConfirm">
+  </ng-container>
+  <div *ngIf="error">
+    <p class="mat-body-1" style="color:crimson">{{ error }}</p>
+    <p class="mat-body-1" *ngIf="errorCount > 0">Осталось попыток:
+      <strong>{{ maxErrorCount - errorCount }}</strong>
+    </p>
+  </div>
+</div>
+
+<ng-template #enter>
+  <mat-form-field>
+    <span matPrefix>{{ phoneNumber.country}} &nbsp;</span>
+    <input type="tel" matInput placeholder="Телефон" autocomplete="off" [(ngModel)]="phoneNumber.number" maxlength="10">
+  </mat-form-field>
+</ng-template>
+
+<ng-template #buttonsEnter>
+  <div class="buttons-wrapper">
+    <button mat-dialog-close mat-button color="primary">Отмена</button>
+    <button *ngIf="!confirmationResult" mat-raised-button color="warn" (click)="sendLoginCode()">Отправить СМС</button>
+
+    {{ captchaSolved }} {{ phoneNumber?.number?.length != 10 }}
+  </div>
+</ng-template>
+
+
+<ng-template #confirm>
+  <div class="wrapper">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Код из СМС" [(ngModel)]="verificationCode">
+    </mat-form-field>
+  </div>
+</ng-template>
+
+<ng-template #buttonsConfirm>
+  <button mat-raised-button color="primary" (click)="verifyCode(verificationCode)">Отправить</button>
+</ng-template>
+ -->

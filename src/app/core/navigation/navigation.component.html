@@ -1,0 +1,27 @@
+<div class="menu-list">
+
+  <div class="menu-list-item">
+    <div class="menu-item-wrapper">
+      <a mat-flat-button routerLink="" routerLinkActive [routerLinkActiveOptions]="{exact: true}" #main="routerLinkActive"
+        [ngClass]="{'active' : main.isActive}" class="menu-item">
+        <h3 class="mat-subheading-2">Главная</h3>
+      </a>
+    </div>
+  </div>
+
+  <div class="menu-list-item" *ngFor="let menuItem of menu">
+    <div class="menu-item-wrapper">
+      <a mat-flat-button [routerLink]="menuItem.url" routerLinkActive #item="routerLinkActive" [ngClass]="{'active' : item.isActive}"
+        class="menu-item">
+        <h3 class="mat-subheading-2">{{ menuItem.name }}</h3>
+      </a>
+
+      <div class="submenus" *ngIf="item.isActive" [@fade]='menuItem.urls?.length'>
+        <a *ngFor="let submenuItem of menuItem.urls; trackBy: submenuItem?.url" mat-flat-button [routerLink]="menuItem.url + '/' + submenuItem.url"
+          routerLinkActive="active" class="submenu-item">
+          <h4 class="mat-subheading-2">{{ submenuItem.name }}</h4>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

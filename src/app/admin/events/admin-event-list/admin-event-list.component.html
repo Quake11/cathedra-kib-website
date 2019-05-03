@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <mat-progress-bar mode="indeterminate" *ngIf="(events$ | async) === null"></mat-progress-bar>
+  <div style="width: 100%;display: flex;justify-content: flex-end;margin-bottom: 25px;">
+    <a mat-raised-button color="primary" routerLink="create">
+      + Событие
+    </a>
+  </div>
+
+  <h3 class="mat-title" *ngIf="(events$ | async)?.length <= 0">Нет событий</h3>
+
+  <div class="event-items-wrapper">
+    <app-admin-event-item [item]="eventItem" *ngFor="let eventItem of events$ | async; trackBy: trackById" class="example-item"></app-admin-event-item>
+  </div>
+</div>

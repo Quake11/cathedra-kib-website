@@ -1,0 +1,29 @@
+i {
+  font-size: 1.5rem;
+  line-height: 1.7em;
+  padding-right: 10px;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+
+  >* {
+    margin: 5px;
+  }
+}
+
+.auth {
+  display: flex;
+  justify-content: space-evenly;
+
+  >* {
+    margin: 5px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}

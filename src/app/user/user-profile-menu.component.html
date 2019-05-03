@@ -1,0 +1,38 @@
+<div class="wrapper" ngClass.xs="xs">
+  <div *ngIf="loading" style="justify-content: center;display: flex;margin-left:7px;">
+    <mat-spinner diameter="35"></mat-spinner>
+  </div>
+
+
+  <div *ngIf="(user$ | async) === null; else authenticated">
+    <button mat-stroked-button color="primary" routerLink="login" *ngIf="!loading && !(user$ | async)">
+      Вход
+    </button>
+  </div>
+
+  <!-- User logged in -->
+  <ng-template #authenticated>
+    <div *ngIf="user$ | async as user" @fadeInOut>
+      <div class="profile">
+        <div class="avatar-wrapper">
+          <img [src]="user.photoURL ? user.photoURL : 'assets/no-avatar.svg'" routerLink="/profile">
+        </div>
+        <button mat-button [matMenuTriggerFor]="menu" [disableRipple]="mediaObserver.isActive('xs')">
+          <div class="name-wrapper">
+            <h4 class="profile-name" *ngIf="mediaObserver.isActive('gt-xs')">
+              {{ getFirstname(user) }}
+            </h4>
+            <mat-icon>arrow_drop_down</mat-icon>
+          </div>
+        </button>
+      </div>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/chat">Сообщения</button>
+        <button mat-menu-item routerLink="/profile/edit">Редактировать профиль</button>
+        <button mat-menu-item (click)="signOut()">Выйти</button>
+      </mat-menu>
+
+    </div>
+  </ng-template>
+</div>

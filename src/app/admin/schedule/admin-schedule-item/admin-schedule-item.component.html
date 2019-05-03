@@ -1,0 +1,22 @@
+<ng-container *ngIf="item">
+  <div class="wrapper" @fadeInOut>
+    <a routerLink="/student/schedule">
+      {{ item.title }}
+    </a>
+    <p class="mat-body-1 description">{{ item.description }}</p>
+
+    <div class="controls">
+      <div style="display:flex;align-items: center;">
+        <a mat-stroked-button [routerLink]="item.id" color="primary" style="margin-right: 10px;">Редактировать</a>
+        <a mat-button [href]="url$ | async" color="primary" *ngIf="url$ | async" [download]="item.fileName" target="_blank">Скачать</a>
+        <p class="mat-caption" *ngIf="(url$ | async) === null" style="color: darkred;margin-left: 15px;">Нет файла</p>
+      </div>
+
+      <button mat-stroked-button color="warn" type="button" appHoldable (holdTime)="deleteSchedule($event, item.id)">
+        Удалить расписание
+      </button>
+    </div>
+    <mat-progress-bar *ngIf="progress" class="example-margin" color="warn" mode="determinate" [value]="progress">
+    </mat-progress-bar>
+  </div>
+</ng-container>

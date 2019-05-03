@@ -1,0 +1,46 @@
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 200px;
+  border: 2px dashed lightblue;
+  border-radius: 10px;
+  background: white;
+  margin: 10px 0;
+  padding: 15px;
+
+  transition: 200ms;
+
+  &.hovering {
+    border: 2px dashed lightgreen;
+    color: #dadada !important;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVQoU2NkIAJMeDfhPyMhdSBFBUIFjHgVwhSBDMOpEFkRToXoirAqxKYIQyEuRSgK8SmCKySkCKyQGEUghQCQ5ScYFcIbxAAAAABJRU5ErkJggg==) repeat;
+  }
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+.attached-file-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+label.file-label {
+  display: flex;
+  flex-direction: column;
+
+  .file-cta {
+    margin-top: 25px;
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-family: Roboto;
+  }
+}

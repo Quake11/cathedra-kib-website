@@ -1,0 +1,11 @@
+<ng-container *ngIf="groups$ | async as groups">
+  <h2 class="mat-headline">
+    Сессии
+  </h2>
+  <div class="groups">
+    <div *ngFor="let group of groups" class="group">
+      <h2>Для группы {{ group.name }}</h2>
+      <app-exams-group [group]="group"></app-exams-group>
+    </div>
+  </div>
+</ng-container>

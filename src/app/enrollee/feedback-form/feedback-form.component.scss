@@ -1,0 +1,195 @@
+:host {
+  background: url(/assets/enrollee/shield.svg) no-repeat;
+  background-position-x: center;
+  background-size: contain;
+  min-height: 600px;
+  justify-content: center;
+  position: relative;
+  width: 750px;
+  display: flex;
+  padding-left: 40px;
+
+  .title {
+    margin-top: 30px;
+    color: white;
+    position: absolute;
+    top: 5px;
+  }
+
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+
+    mat-form-field {
+      width: 250px;
+      max-width: 90vw;
+
+
+      input,
+      textarea {
+        color: white;
+        caret-color: #d8d8d8;
+        background: #4956c7;
+      }
+
+
+      .label {
+        color: white;
+      }
+    }
+
+    .privacy {
+      width: 400px;
+      color: white;
+      text-align: center;
+      max-width: 90vw;
+      background: #4956c7;
+      border-radius: 5px;
+      padding: 5px;
+
+      a {
+        color: #71d7ff;
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    & {
+      min-height: 350px;
+      background-size: auto;
+      padding-left: 0;
+
+      .title {
+        margin-bottom: 0;
+        top: -50px;
+        color: black;
+        margin-top: 0;
+
+        h2 {
+          font-size: 2rem !important;
+        }
+      }
+
+      form {
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
+
+
+
+
+.sent {
+  // Define vars we'll be using
+  $brand-success: #5cb85c;
+  $loader-size: 7em;
+  $loader-border-width: 4px;
+  $check-height: $loader-size/2;
+  $check-width: $check-height/2;
+  $check-left: ($loader-size/8 + $loader-size/12);
+  $check-thickness: 3px;
+  $check-color: $brand-success;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 200ms;
+
+  * {
+    transition: 200ms;
+  }
+
+  h3 {
+    color: white;
+    text-align: center;
+  }
+
+  .circle-loader {
+    margin-bottom: $loader-size/2;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-left-color: $check-color;
+    animation: loader-spin 1.2s infinite linear;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 50%;
+    border-width: $loader-border-width;
+    width: $loader-size;
+    height: $loader-size;
+  }
+
+  .load-complete {
+    -webkit-animation: none;
+    animation: none;
+    border-color: $check-color;
+    transition: border 500ms ease-out;
+  }
+
+  .checkmark {
+    // display: none;
+
+    &.draw:after {
+      animation-duration: 800ms;
+      animation-timing-function: ease;
+      animation-name: checkmark;
+      transform: scaleX(-1) rotate(135deg);
+    }
+
+    &:after {
+      opacity: 1;
+      height: $check-height;
+      width: $check-width;
+      transform-origin: left top;
+      border-right: $check-thickness solid $check-color;
+      border-top: $check-thickness solid $check-color;
+      content: '';
+      left: $check-left;
+      top: $check-height;
+      position: absolute;
+    }
+  }
+
+  @keyframes loader-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes checkmark {
+    0% {
+      height: 0;
+      width: 0;
+      opacity: 1;
+    }
+
+    20% {
+      height: 0;
+      width: $check-width;
+      opacity: 1;
+    }
+
+    40% {
+      height: $check-height;
+      width: $check-width;
+      opacity: 1;
+    }
+
+    100% {
+      height: $check-height;
+      width: $check-width;
+      opacity: 1;
+    }
+  }
+}

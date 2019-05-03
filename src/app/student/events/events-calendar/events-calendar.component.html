@@ -1,0 +1,7 @@
+<ng-container *ngIf="events$ | async as events">
+  <h2 class="mat-headline">
+    Календарь событий
+  </h2>
+  <span class="mat-caption">(последнее обновление: 01.01.2019)</span>
+  <p-fullCalendar [events]="events" [options]="options"></p-fullCalendar>
+</ng-container>

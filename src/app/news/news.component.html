@@ -1,0 +1,11 @@
+<div class="wrapper" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg" ngClass.xl="xl">
+  <h2 class="mat-display-1">Новости</h2>
+  <!--  <app-news-list fakeItems="4"></app-news-list> -->
+  <ng-container *ngIf="!(news$ | async)">
+    <app-news-list fakeItems="4"></app-news-list>
+  </ng-container>
+
+  <ng-container *ngIf="news$ | async as news">
+    <app-news-list [news]="news"></app-news-list>
+  </ng-container>
+</div>

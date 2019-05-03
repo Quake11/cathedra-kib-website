@@ -1,0 +1,30 @@
+:host {
+  margin-top: 50px;
+
+  h2 {
+    text-align: center;
+  }
+
+  .groups {
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .group {
+      width: 500px;
+      max-width: 90vw;
+      padding: 25px 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+      border: 1px solid #eaeaea6b;
+      box-shadow: 1px 3px 5px #b3b3b354;
+      border-radius: 3px;
+    }
+  }
+
+}

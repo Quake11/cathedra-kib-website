@@ -1,0 +1,25 @@
+:host {
+  display: inline-block;
+
+  &:nth-child(even) {
+    background: #80808021;
+  }
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+.date {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #3e4ebc;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}

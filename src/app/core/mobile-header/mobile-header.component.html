@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isSmallScreen()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <a class="logo-wrapper" routerLink="/" alt="Логотип">
+    <img src="assets/kib-logo.svg" class="logo" alt="Логотип" />
+  </a>
+
+  <app-user-profile-menu></app-user-profile-menu>
+</div>

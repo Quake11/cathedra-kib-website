@@ -1,0 +1,24 @@
+<ng-container *ngIf="item">
+  <div class="wrapper" @fadeInOut>
+    <a [routerLink]="'/news/' + item.id">
+      {{ item.title }}
+    </a>
+
+    <p class="mat-caption date">
+      {{ getDate(item.publicationDate) }}
+    </p>
+
+    <p class="mat-body-1" style="margin-top: 5px" [innerHTML]="item.announcement">
+    </p>
+
+    <div class="controls">
+      <a mat-stroked-button [routerLink]="item.id" color="primary">Редактировать</a>
+      <button mat-stroked-button type="button" color="warn" appHoldable (holdTime)="deleteNews($event, item.id)">
+        Удалить новость
+      </button>
+    </div>
+    <mat-progress-bar *ngIf="progress" class="example-margin" color="warn" mode="determinate" [value]="progress">
+    </mat-progress-bar>
+  </div>
+
+</ng-container>

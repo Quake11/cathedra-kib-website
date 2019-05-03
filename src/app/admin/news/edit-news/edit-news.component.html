@@ -1,0 +1,47 @@
+<div class="wrapper">
+  <ng-container *ngIf="newsEdited; then prompt; else form"> </ng-container>
+
+  <ng-template #prompt>
+    <div class="news-added">
+      <h3 class="mat-title">
+        Новость успешно отредактирована! <mat-icon>done_all</mat-icon>
+      </h3>
+      <div class="buttons">
+        <a routerLink=".." mat-button color="primary">Вернуться к списку новостей</a>
+        <a mat-stroked-button color="primary" [routerLink]="'/news/' + id">Посмотреть новость</a>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #form>
+    <mat-progress-bar mode="indeterminate" *ngIf="!(editableNews$ | async)"></mat-progress-bar>
+    <h3 class="mat-subheading-1" *ngIf="(author$ | async) as author">
+      Автор: <strong>{{ getName(author) }}</strong>
+    </h3>
+    <form (ngSubmit)="onSubmit()" [formGroup]="newsForm" *ngIf="(editableNews$ | async)">
+      <mat-form-field appearance="fill">
+        <mat-label>Заголовок</mat-label>
+        <input matInput [formControl]="title" [readonly]="newsEditing" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Анонс</mat-label>
+        <textarea matTextareaAutosize matInput [formControl]="announcement" [readonly]="newsEditing"></textarea>
+      </mat-form-field>
+
+      <!--   <app-ngx-editor placeholder="Текст" [spellcheck]="true" [formControl]="body" height="200px" [editable]="!newsAdding"></app-ngx-editor> -->
+      <p-editor [formControl]="body" [style]="{ height: '320px' }"></p-editor>
+      <mat-progress-bar mode="query" *ngIf="newsEditing"></mat-progress-bar>
+
+      <div class="controls">
+        <a mat-button [routerLink]="newsEditing ? null : '..'" [disabled]="newsEditing">
+          Назад
+        </a>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!newsForm.valid || newsEditing">
+          Сохранить
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</div>

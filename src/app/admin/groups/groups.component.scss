@@ -1,0 +1,19 @@
+:host {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .group {
+    margin: 10px 0;
+  }
+
+  form {
+    margin-top: 25px;
+
+    button {
+      margin-left: 25px;
+    }
+  }
+}

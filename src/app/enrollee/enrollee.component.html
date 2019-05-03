@@ -1,0 +1,98 @@
+<div class="wrapper">
+  <section class="screen-1">
+    <img class="part-1" src="assets/enrollee/part-1.svg">
+    <div class="head-text">
+      <h2 class="mat-display-2">
+        <p>Обучайтесь на кафедре</p>
+        <p>Информационной</p>
+        <p>Безопасности</p>
+      </h2>
+    </div>
+    <img class="head-image" src="assets/enrollee/head.svg">
+  </section>
+
+  <section class="screen-2">
+    <h2 class="mat-display-2 screen-title">
+      Наши преимущества
+    </h2>
+
+    <div class="cards">
+      <mat-card>
+        <img mat-card-image src="assets/enrollee/cards/advantages/1.svg">
+        <mat-card-title>
+          Опытные преподаватели
+        </mat-card-title>
+        <mat-card-content>
+          Высокопрофессиональный преподавательский состав
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <img mat-card-image src="assets/enrollee/cards/advantages/2.svg">
+        <mat-card-title>
+          Перспективы трудоустройства
+        </mat-card-title>
+        <mat-card-content>
+          Мы сотрудничаем с лучшими работодателями
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <img mat-card-image src="assets/enrollee/cards/advantages/3.svg">
+        <mat-card-title>
+          Современная профессия
+        </mat-card-title>
+        <mat-card-content>
+          Высокая потребность в специалистах по ИБ продиктована информатизацией большинства сфер деятельности
+          современного человека
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <app-programs></app-programs>
+
+  <section>
+    <h2 class="mat-display-2 screen-title">
+      Знакомьтесь, наши сотрудники:
+    </h2>
+    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+  </section>
+
+  <app-companies></app-companies>
+
+  <section class="screen-5">
+    <app-feedback-form (success)="onFeedbackSuccess($event)"></app-feedback-form>
+    <img src="assets/enrollee/thinking.svg" *ngIf="!feedbackSent" @fadeInFromLeft>
+    <img src="assets/enrollee/success.svg" *ngIf="feedbackSent" @fadeInFromRight>
+  </section>
+
+
+  <section>
+
+    <div class="navigation">
+      <figure>
+        <a routerLink="/cathedra/teachers">
+          <img src="assets/enrollee/teachers-team.svg">
+          <figcaption>
+            <h3>Преподавательский состав</h3>
+          </figcaption>
+        </a>
+      </figure>
+
+      <figure>
+        <a routerLink="/cathedra/about">
+          <img src="assets/enrollee/about.svg">
+          <figcaption>
+            <h3>О кафедре</h3>
+          </figcaption>
+        </a>
+      </figure>
+    </div>
+  </section>
+  <!--
+  <img src="assets/digital_world.svg">
+  <img src="assets/business_man.svg">
+  <img src="assets/thinking.svg">
+  <img src="assets/winners.svg"> -->
+</div>

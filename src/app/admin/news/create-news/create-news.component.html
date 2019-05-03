@@ -1,0 +1,50 @@
+<div class="wrapper">
+
+  <ng-container *ngIf="newsAdded; then prompt else form">
+  </ng-container>
+
+  <ng-template #prompt>
+    <div class="news-added">
+      <h3 class="mat-title">Новость добавлена! <mat-icon>done</mat-icon>
+      </h3>
+      <div class="buttons">
+        <button (click)="addNewsAgain()" type="button" mat-raised-button color="primary">Добавить ещё</button>
+        <a mat-stroked-button color="primary" [routerLink]="'/news/' + addedNewsId">Посмотреть новость</a>
+      </div>
+
+      <a mat-button color="primary" routerLink=".." style="margin-top: 25px;">Вернуться к списку новостей</a>
+    </div>
+
+  </ng-template>
+
+  <ng-template #form>
+    <form (ngSubmit)="onSubmit()" [formGroup]="newsForm">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Заголовок</mat-label>
+        <input matInput [formControl]="title" [readonly]="newsAdding" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Анонс</mat-label>
+        <textarea matTextareaAutosize matInput [formControl]="announcement" [readonly]="newsAdding" type="text"></textarea>
+      </mat-form-field>
+      <!--  <app-ngx-editor placeholder="Текст" [spellcheck]="true" [formControl]="body" height="200px" [editable]="!newsAdding"></app-ngx-editor> -->
+      <p-editor [formControl]="body" [style]="{'height':'320px'}"></p-editor>
+
+      <mat-checkbox color="primary" formControlName="anonymous">Опубликовать анонимно</mat-checkbox>
+
+      <mat-progress-bar mode="query" *ngIf="newsAdding"></mat-progress-bar>
+
+      <div class="controls">
+        <a mat-button [routerLink]="newsAdding ? null : '..'" [disabled]="newsAdding">
+          Назад
+        </a>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!newsForm.valid || newsAdding">
+          Опубликовать новость
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</div>

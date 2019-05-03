@@ -1,0 +1,12 @@
+<!-- <mat-progress-bar mode="indeterminate" *ngIf="!(news$ | async)"></mat-progress-bar> -->
+<div class="wrapper" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg" ngClass.xl="xl">
+
+  <ng-container *ngIf="fakeItems > 0">
+    <app-news-item @fade *ngFor="let newsItem of createArray(fakeItems)" fake="true" class="news-item">
+    </app-news-item>
+  </ng-container>
+
+  <ng-container *ngIf="!fakeItems">
+    <app-news-item @fade [item]="newsItem" *ngFor="let newsItem of news; trackBy: newsItem?.id" class="news-item"></app-news-item>
+  </ng-container>
+</div>

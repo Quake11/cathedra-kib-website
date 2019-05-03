@@ -1,0 +1,17 @@
+:host {
+  display: block;
+
+  .wrapper {
+    padding: 15px;
+
+    &.xs {
+      padding: 5px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+}

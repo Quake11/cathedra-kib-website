@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <ng-container *ngIf="scheduleAdded; then prompt; else form"> </ng-container>
+
+  <ng-template #prompt>
+    <div class="schedule-added">
+      <h3 class="mat-title">
+        Расписание опубликовано! <mat-icon>done</mat-icon>
+      </h3>
+      <div class="buttons">
+        <button (click)="addScheduleAgain()" type="button" mat-raised-button color="primary">
+          Добавить ещё
+        </button>
+        <a mat-stroked-button color="primary" routerLink="/student">
+          Посмотреть расписание
+        </a>
+      </div>
+
+      <a mat-button color="primary" routerLink=".." style="margin-top: 25px;">Вернуться к списку расписаний</a>
+    </div>
+  </ng-template>
+
+  <ng-template #form>
+    <form (ngSubmit)="onSubmit()" [formGroup]="scheduleForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Название (заголовок)</mat-label>
+        <input matInput [formControl]="title" [readonly]="scheduleAdding" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Описание</mat-label>
+        <textarea matTextareaAutosize matInput [formControl]="description" [readonly]="scheduleAdding"></textarea>
+      </mat-form-field>
+
+      <app-file-upload [dropzoneTitle]="dropzoneTitle" [uploadFolder]="uploadFolder" [metadata]="metadata" (uploaded)="onUploadedFileData($event)"></app-file-upload>
+
+      <mat-progress-bar mode="query" *ngIf="scheduleAdding"></mat-progress-bar>
+
+      <div class="controls">
+        <a mat-button [routerLink]="scheduleAdding ? null : '..'" [disabled]="scheduleAdding">
+          Назад
+        </a>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="
+            !scheduleForm.valid || scheduleAdding || !uploadedFilePath
+          ">
+          Опубликовать расписание
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</div>

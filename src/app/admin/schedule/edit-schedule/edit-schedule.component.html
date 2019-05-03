@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <ng-container *ngIf="scheduleEdited; then prompt; else form"> </ng-container>
+
+  <ng-template #prompt>
+    <div class="schedule-added">
+      <h3 class="mat-title">
+        Расписание успешно отредактировано! <mat-icon>done</mat-icon>
+      </h3>
+      <div class="buttons">
+        <a mat-button color="primary" routerLink="..">Вернуться к списку расписаний</a>
+        <a mat-stroked-button color="primary" routerLink="/student">
+          Посмотреть расписание
+        </a>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #form>
+    <form (ngSubmit)="onSubmit()" [formGroup]="scheduleForm">
+      <mat-progress-bar mode="indeterminate" *ngIf="!(editableSchedule$ | async)"></mat-progress-bar>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Название (заголовок)</mat-label>
+        <input matInput [formControl]="title" [readonly]="scheduleEditing" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Описание</mat-label>
+        <textarea matTextareaAutosize matInput [formControl]="description" [readonly]="scheduleEditing"></textarea>
+      </mat-form-field>
+
+      <app-file-upload *ngIf="loaded" [dropzoneTitle]="dropzoneTitle" [uploadFolder]="uploadFolder" [metadata]="metadata"
+        (uploaded)="onUploadedFileData($event)" (deleted)="onDeletedFile()" [uploadedFileName]="uploadedFileName"
+        [uploadedFilePath]="uploadedFilePath"></app-file-upload>
+
+      <mat-progress-bar mode="query" *ngIf="scheduleEditing"></mat-progress-bar>
+
+      <div class="controls">
+        <a mat-button [routerLink]="scheduleEditing ? null : '..'" [disabled]="scheduleEditing">
+          Назад
+        </a>
+        <button mat-raised-button color="primary" type="submit" [disabled]="(!scheduleForm.dirty && !fileChanged) || scheduleEditing || !uploadedFileName">
+          Сохранить изменения
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</div>

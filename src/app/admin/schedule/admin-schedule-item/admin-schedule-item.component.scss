@@ -1,0 +1,23 @@
+:host {
+  display: inline-block;
+  width: 100%;
+
+  &:nth-child(even) {
+    background: #80808021;
+  }
+
+
+  .wrapper {
+    padding: 15px;
+
+    .description {
+      margin-top: 0;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+}

@@ -1,0 +1,61 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .programs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .program {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 3px;
+      transition: 150ms;
+      box-shadow: 0 0 4px #00000026;
+      flex: 1;
+
+      &:hover,
+      &.active {
+        background: #6aa8ea36;
+        border: 1px solid #2989f1;
+      }
+
+      &:hover {
+        transform: scale(1.03);
+      }
+
+      h3 {
+        padding: 10px 15px;
+        margin: 0;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      a {
+        margin: 15px;
+      }
+
+      &.add {
+        border: 1px solid #00000014;
+        user-select: none;
+        cursor: pointer;
+
+
+
+        span {
+          font-size: 64px;
+        }
+
+        h3 {
+          color: black;
+          font-size: 20px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

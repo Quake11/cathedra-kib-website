@@ -1,0 +1,171 @@
+.part-1 {
+  position: absolute;
+  left: 0;
+  bottom: 5%;
+  width: 7vw;
+
+  @media screen and (max-width: 1000px) {
+    & {
+      display: none;
+    }
+  }
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  section {
+    margin: 50px 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: calc(2vh + 1.5rem) !important;
+      line-height: calc(2vh + 1.6rem);
+
+      p {
+        margin: 5px 0;
+      }
+    }
+
+    mat-card {
+      display: flex;
+      flex-direction: column;
+
+      mat-card-content {
+        font-size: 1.3rem;
+      }
+
+      mat-card-actions {
+        margin-top: auto;
+      }
+    }
+  }
+
+  section.screen-1 {
+    position: relative;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .head-text {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    .head-image {
+      width: 500px;
+      max-width: 90vw;
+    }
+
+
+    .text {
+      position: absolute;
+      left: 10%;
+      top: 30%;
+      max-width: 45%;
+      color: white;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+
+  // advantages
+  section.screen-2 {
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      mat-card {
+        box-shadow: none;
+        max-width: 360px;
+        margin: 25px 50px;
+
+        mat-card-title {
+          text-align: center;
+        }
+
+
+        mat-card-content {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  section.screen-5 {
+    margin: 25px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    img {
+      width: 450px;
+      max-width: 90vw;
+    }
+  }
+
+
+
+  .mat-form-field-underline {
+    background-color: rgba(210, 210, 210, 0.42);
+  }
+
+  /*   img {
+    height: 300px;
+    margin: 10px;
+  } */
+
+  .screen-title {
+    text-align: center;
+  }
+}
+
+
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 75px;
+
+  figure {
+    transition: 250ms;
+
+    figcaption {
+      font-size: 1.5rem;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    img {
+      height: 300px;
+      max-width: 75vw;
+    }
+
+
+    &:hover {
+      figcaption {
+        text-decoration: underline;
+
+      }
+    }
+  }
+}

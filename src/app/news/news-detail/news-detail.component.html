@@ -1,0 +1,33 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!newsData"></mat-progress-bar>
+
+<ng-container *ngIf="newsData">
+  <div class="wrapper" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg" ngClass.xl="xl">
+    <h2 class="mat-headline title">
+      {{ newsData.title }}
+    </h2>
+
+    <div class="meta">
+      <div class="date-wrapper">
+        <p class="mat-caption date" [matTooltip]="getDateWithTime(newsData.publicationDate)" matTooltipPosition="above">
+          <ng-container *ngIf="mediaObserver.isActive('gt-xs')">Опубликовано</ng-container>
+          {{ getDate(newsData.publicationDate) }}
+        </p>
+
+
+        <mat-icon *ngIf="newsData.editDate && editAuthorData" class="edited" [matTooltip]="editedTooltip()"
+          matTooltipPosition="above">edit</mat-icon>
+      </div>
+      <p class="mat-caption author" *ngIf="authorData">
+        by <a [routerLink]="'/user/' + authorData.uid">
+          {{ getUserName(authorData) }}
+        </a>
+      </p>
+
+    </div>
+
+
+
+    <div class="body" [innerHTML]="newsData.body">
+    </div>
+  </div>
+</ng-container>

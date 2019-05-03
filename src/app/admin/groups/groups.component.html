@@ -1,0 +1,12 @@
+<ng-container *ngIf="groups$ | async as groups">
+  <div *ngFor="let group of groups; trackBy: trackById" class="group" @fadeInOut>
+    <app-group [group]="group"></app-group>
+  </div>
+</ng-container>
+
+<form (ngSubmit)="addGroup(form.value)" [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Номер группы" formControlName="name">
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary">Добавить группу</button>
+</form>

@@ -1,0 +1,23 @@
+<div class="wrapper" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg" ngClass.xl="xl" *ngIf="item">
+  <p class="title">
+    {{ item.title }}
+  </p>
+
+  <div class="date-wrapper">
+    <p class="mat-caption date" [matTooltip]="getDateWithTime(item.publicationDate)" matTooltipPosition="above" *ngIf="item.publicationDate">
+      {{ getDate(item.publicationDate) }}
+    </p>
+
+    <mat-icon *ngIf="item.editDate && editAuthorData" class="edited" [matTooltip]="editedTooltip()" matTooltipPosition="above">edit</mat-icon>
+  </div>
+
+  <p class="mat-body-1" class="description" [innerHTML]="item.description" *ngIf="item.description">
+  </p>
+
+  <div class="download">
+    <a [href]="fileUrl" [download]="item.fileName" target="_blank">
+      Скачать
+    </a>
+  </div>
+
+</div>

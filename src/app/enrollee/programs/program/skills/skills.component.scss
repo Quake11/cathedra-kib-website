@@ -1,0 +1,77 @@
+:host {
+  .skills-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    div[class^="year-"] {
+      padding-left: 25px;
+      margin: 10px;
+      border-left: 3px solid;
+      border-image-slice: 1;
+      width: 420px;
+      max-width: 90vw;
+
+      @media screen and (max-width: 600px) {
+        & {
+          margin: 25px 5px;
+        }
+      }
+
+      h3.year-number {
+        font-size: 3.5rem;
+        margin: 0;
+        color: #20212f;
+        font-weight: 300;
+      }
+
+      .skills {
+        h3 {
+          font-size: 1.3rem;
+          font-weight: 400;
+          color: white;
+          margin-bottom: 0;
+          padding: 10px 15px;
+          margin-left: -28px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-top-right-radius: 5px;
+
+          mat-icon {
+            margin-left: 15px;
+          }
+
+
+        }
+
+        ul.list {
+          list-style: none;
+          margin-left: -27px;
+          margin-top: 0;
+          margin-bottom: 0;
+          padding: 0;
+          border-bottom-right-radius: 5px;
+        }
+
+      }
+
+      .practices {
+        margin-right: 25px;
+
+        .practice {
+          h4.name {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 3px;
+            text-align: center;
+            margin-bottom: 0;
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+
+}

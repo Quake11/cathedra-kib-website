@@ -1,0 +1,15 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!(schedules$ | async)"></mat-progress-bar>
+
+<div class="wrapper">
+  <div style="width: 100%;display: flex;justify-content: flex-end;margin-bottom: 25px;">
+    <a mat-raised-button color="primary" routerLink="create">
+      + Расписание
+    </a>
+  </div>
+
+  <h3 class="mat-title" *ngIf="(schedules$ | async)?.length <= 0">Нет расписаний</h3>
+
+  <app-admin-schedule-item [item]="item" *ngFor="let item of schedules$ | async; trackBy: trackById;" class="schedule-item">
+  </app-admin-schedule-item>
+
+</div>

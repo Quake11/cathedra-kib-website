@@ -1,0 +1,42 @@
+<div class="wrapper">
+  <a class="logo-wrapper" routerLink="/" alt="На главную">
+    <img alt="Логотип" src="assets/kib-logo.svg" class="logo" />
+  </a>
+
+  <div class="navigation">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link disableRipple="true" routerLink="" routerLinkActive #rla="routerLinkActive"
+        [routerLinkActiveOptions]="{ exact: true }" [active]="rla.isActive">
+        Главная
+      </a>
+      <div *ngFor="let menuItem of menu; let i = index">
+        <ng-container *ngIf="menuItem.urls; then: withSubmenu; else: noSubmenu">
+        </ng-container>
+
+        <ng-template #noSubmenu>
+          <a mat-tab-link disableRipple="true" [routerLink]="[menuItem.url]" routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive" [matMenuTriggerFor]="menuNavigation" (mouseleave)="closeTrigger(menuTrigger)">
+            {{ menuItem.name }}
+          </a>
+          <mat-menu #menuNavigation="matMenu" hasBackdrop="false"> </mat-menu>
+        </ng-template>
+
+        <ng-template #withSubmenu>
+          <a mat-tab-link disableRipple="true" [routerLink]="[menuItem.url]" routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive" [matMenuTriggerFor]="menuNavigation" #menuTrigger="matMenuTrigger" (mouseover)="overMenu(i)">
+            {{ menuItem.name }}
+          </a>
+
+          <mat-menu #menuNavigation="matMenu" hasBackdrop="false">
+            <span (mouseleave)="closeTrigger(menuTrigger)">
+              <a mat-menu-item [routerLink]="menuItem.url + '/' + submenuItem.url" *ngFor="let submenuItem of menuItem.urls">
+                {{ submenuItem.name }}</a>
+            </span>
+          </mat-menu>
+        </ng-template>
+      </div>
+    </nav>
+  </div>
+
+  <app-user-profile-menu></app-user-profile-menu>
+</div>

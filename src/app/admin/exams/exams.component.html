@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="!error">
+    <mat-form-field>
+      <mat-label>Предмет</mat-label>
+      <input matInput formControlName="subject">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Тип" formControlName="type">
+        <mat-option *ngFor="let type of types | keyvalue" [value]="type.key">
+          {{ type.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-select placeholder="Группа" formControlName="group">
+        <mat-option *ngFor="let group of groups$ | async" [value]="group.uid">
+          {{ group.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="date" (focus)="startDatePicker.open()" [matDatepicker]="startDatePicker"
+        placeholder="Дата">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+
+
+    <button type="submit" color="primary" [disabled]="form.invalid || sending" mat-raised-button>Добавить</button>
+    <mat-progress-bar *ngIf="sending" color="primay" mode="indeterminate"> </mat-progress-bar>
+  </form>
+
+
+  <ng-container *ngIf="exams$ | async as exams">
+    <div class="exams">
+      <div *ngFor="let exam of exams; trackBy: trackById" class="exam" @fadeInOut>
+        <app-exam-item [exam]="exam"></app-exam-item>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
+
+<div *ngIf="error">
+  Произошла ошибка при сохранении: {{ error }}
+  <button mat-raised-button color="primary" (click)="resetError()">Попробовать ещё раз</button>
+</div>
+
+<h2 style="margin-top: 50px">Превью:</h2>
+<app-exams-list></app-exams-list>

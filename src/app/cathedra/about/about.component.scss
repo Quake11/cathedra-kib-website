@@ -1,0 +1,12 @@
+:host {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  padding: 15px;
+
+  img {
+    width: 100%;
+    max-width: 800px;
+  }
+}

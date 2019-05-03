@@ -1,0 +1,40 @@
+<ng-container *ngIf="skills || practices || modules">
+  <div class="skills-wrapper">
+    <div [className]="'year-' + year" *ngFor="let year of years">
+      <h3 class="year-number"> {{ year }} год</h3>
+      <div class="skills">
+        <div class="hard" *ngIf="modules || getHardSkills(year).length > 0">
+          <h3>Профессиональные навыки (hard skills) <mat-icon>settings</mat-icon>
+          </h3>
+          <ul class="list">
+            <ng-container *ngFor="let skill of getHardSkills(year)">
+              <li skillComponent class="skill" [skill]="skill"></li>
+            </ng-container>
+            <ng-container *ngIf="modules && getModules(year).length > 0 && getModules(year) as modules">
+              <div skillsModuleComponent class="module" [module]="module" *ngFor="let module of getModules(year)">
+              </div>
+            </ng-container>
+          </ul>
+        </div>
+
+        <div class="soft" *ngIf="getSoftSkills(year).length > 0">
+          <h3>Личностные навыки (soft skills) <mat-icon>people</mat-icon>
+          </h3>
+          <ul class="list">
+            <ng-container *ngFor="let skill of getSoftSkills(year)">
+              <li skillComponent class="skill" [skill]="skill"></li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+
+      <ng-container *ngIf="practices">
+        <div class="practices" *ngIf="getPractices(year).length > 0 && getPractices(year) as practices">
+          <div class="practice" *ngFor="let practice of practices">
+            <h4 class="name">{{ practice.name }}</h4>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,32 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav fixedInViewport [mode]="isSmallScreen() ? 'over' : 'side'" class="mat-elevation-z5">
+    <div (swipeleft)="sidenav.close()">
+      <div class="sidenav-header">
+        <button mat-icon-button (click)="sidenav.close()" *ngIf="isSmallScreen()">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <a class="logo-wrapper" alt="На главную" routerLink="/">
+          <img src="assets/kib-symbol.svg" alt="На главную" class="logo" />
+        </a>
+      </div>
+
+      <app-user-profile-menu></app-user-profile-menu>
+
+      <app-navigation></app-navigation>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="wrapper">
+      <app-header *ngIf="!isSmallScreen()"></app-header>
+      <app-mobile-header *ngIf="isSmallScreen()"></app-mobile-header>
+
+      <div class="router-outlet-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<p-toast styleClass="custom-toast" key="custom"></p-toast>

@@ -1,0 +1,323 @@
+<ng-container *ngIf="!(program$ | async)">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<ng-container *ngIf="form && !sending && !sent && !error; else info">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="program$ | async as program" @fadeInOut>
+    <div class="form-program-with-preview">
+      <div style="display: flex;flex-direction: column;align-items: center;max-width: 400px;">
+        <h3 style="margin-bottom: 5px;font-weight: 400;">Редактирование программы</h3>
+        <h2 style="margin-top: 5px">{{ getControl('name').value }}</h2>
+        <mat-form-field>
+          <input matInput placeholder="Название программы" formControlName="name" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Образование (высшее/среднее и т.д.)" formControlName="graduation" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Подзаголовок" formControlName="subtitle" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="ID программы" formControlName="id" required>
+          <mat-hint>Будет использован в адресе программы на сайте</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="number" placeholder="Свободных бюджетных мест" formControlName="places">
+        </mat-form-field>
+
+        <div class="cp">
+          <button type="button" mat-button (click)="backgroundColorPickerOpen = true">Выбрать цвет фона</button>
+          <input [(colorPicker)]="backgroundColorPickerValue" [style.background]="backgroundColorPickerValue | safe: 'style'"
+            [cpToggle]="backgroundColorPickerOpen" (colorPickerClose)="backgroundColorPickerOpen = false"
+            (colorPickerChange)="backgroundColorPicked($event)" />
+        </div>
+
+        <mat-form-field>
+          <input matInput placeholder="Цвет фона" formControlName="backgroundColor" required>
+        </mat-form-field>
+
+        <div class="cp">
+          <button type="button" mat-button (click)="fontColorPickerOpen = true">Выбрать цвет шрифта</button>
+          <input [(colorPicker)]="fontColorPickerValue" [style.background]="fontColorPickerValue | safe: 'style'"
+            [cpToggle]="fontColorPickerOpen" (colorPickerClose)="fontColorPickerOpen = false" (colorPickerChange)="fontColorPicked($event)" />
+        </div>
+
+        <app-file-upload uploadFolder="programs" dropzoneTitle="Логотип программы" (uploaded)="onLogoUploaded($event)"
+          (deleted)="onLogoDeleted()" [uploadedFilePath]="program?.imgLogo?.filePath" [uploadedFileName]="program?.imgLogo?.fileName"></app-file-upload>
+
+        <app-file-upload uploadFolder="programs" dropzoneTitle="Изображение обложки" (uploaded)="onCoverUploaded($event)"
+          (deleted)="onCoverDeleted()" (uploading)="onUploadingFiles($event)" [uploadedFilePath]="program?.imgCover?.filePath"
+          [uploadedFileName]="program?.imgCover?.fileName"></app-file-upload>
+      </div>
+
+      <div class="preview">
+        <h2>Превью</h2>
+        <app-program [preview]="form.value"></app-program>
+      </div>
+
+    </div>
+
+    <h2>Скиллы</h2>
+    <div formArrayName="skills" class="skills">
+      <div class="hard">
+        <h3>Хард скиллы</h3>
+        <ng-container *ngFor="let item of form.get('skills')['controls'];let i = index;trackBy: skillsTrackBy">
+          <ng-container *ngTemplateOutlet="skill">
+          </ng-container>
+          <ng-template #skill>
+            <ng-container *ngIf="item.value.type === 'hard'">
+              <div [formGroupName]="i" class="skill" [id]="i" @fadeInOut>
+                <mat-form-field>
+                  <mat-select placeholder="Тип навыка" formControlName="type">
+                    <mat-option value="hard">
+                      Hard
+                    </mat-option>
+                    <mat-option value="soft">
+                      Soft
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-select placeholder="Год обучения (курс)" formControlName="year">
+                    <mat-option value="1">
+                      1
+                    </mat-option>
+                    <mat-option value="2">
+                      2
+                    </mat-option>
+                    <mat-option value="3">
+                      3
+                    </mat-option>
+                    <mat-option value="4">
+                      4
+                    </mat-option>
+                    <mat-option value="5">
+                      5
+                    </mat-option>
+                    <mat-option value="6">
+                      6
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Название навыка" formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Ссылка на видео" formControlName="videoSrc">
+                </mat-form-field>
+
+                <button type="button" color="warn" mat-stroked-button (click)="removeSkill(i)">УДАЛИТЬ</button>
+              </div>
+            </ng-container>
+
+          </ng-template>
+        </ng-container>
+        <div class="skill add" (click)="addSkill('hard')" #hardSkillsContainer>
+          <span>+</span>
+          <h4>Добавить</h4>
+        </div>
+      </div>
+
+      <div class="soft">
+        <h3>Софт скиллы</h3>
+        <ng-container *ngFor="let item of form.get('skills')['controls'];let i = index;trackBy: skillsTrackBy">
+          <ng-container *ngTemplateOutlet="skill">
+          </ng-container>
+          <ng-template #skill>
+            <ng-container *ngIf="item.value.type === 'soft'">
+              <div [formGroupName]="i" class="skill" [id]="i" @fadeInOut>
+                <mat-form-field>
+                  <mat-select placeholder="Тип навыка" formControlName="type">
+                    <mat-option value="hard">
+                      Hard
+                    </mat-option>
+                    <mat-option value="soft">
+                      Soft
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-select placeholder="Год обучения (курс)" formControlName="year">
+                    <mat-option value="1">
+                      1
+                    </mat-option>
+                    <mat-option value="2">
+                      2
+                    </mat-option>
+                    <mat-option value="3">
+                      3
+                    </mat-option>
+                    <mat-option value="4">
+                      4
+                    </mat-option>
+                    <mat-option value="5">
+                      5
+                    </mat-option>
+                    <mat-option value="6">
+                      6
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Название навыка" formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Ссылка на видео" formControlName="videoSrc">
+                </mat-form-field>
+
+                <button type="button" color="warn" mat-stroked-button (click)="removeSkill(i)">УДАЛИТЬ</button>
+              </div>
+            </ng-container>
+
+          </ng-template>
+        </ng-container>
+        <div class="skill add" (click)="addSkill('soft')" #softSkillsContainer>
+          <span>+</span>
+          <h4>Добавить</h4>
+        </div>
+      </div>
+
+      <div class="preview" *ngIf="skills?.value.length > 0">
+        <h3>Превью</h3>
+        <div skillsComponent [skills]="skills?.value" [practices]="practices?.value" [modules]="modules?.value" preview="true"
+          class="skills-preview">
+        </div>
+      </div>
+    </div>
+
+
+
+    <h2>Модули</h2>
+    <div formArrayName="modules" class="modules">
+      <ng-container *ngFor="let item of form.get('modules')['controls'];let i = index;">
+        <div [formGroupName]="i" class="module" [id]="i" @fadeInOut>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Название модуля" formControlName="name">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Год обучения (курс)" formControlName="year">
+              <mat-option value="1">
+                1
+              </mat-option>
+              <mat-option value="2">
+                2
+              </mat-option>
+              <mat-option value="3">
+                3
+              </mat-option>
+              <mat-option value="4">
+                4
+              </mat-option>
+              <mat-option value="5">
+                5
+              </mat-option>
+              <mat-option value="6">
+                6
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <h3>Скиллы модуля</h3>
+          <div formArrayName="skills" class="module-skills">
+            <ng-container *ngFor="let skill of item.get('skills')['controls'];let j = index;">
+              <div [formGroupName]="j" class="module-skill" @fadeInOut>
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Название скилла" formControlName="name">
+                </mat-form-field>
+
+                <button type="button" color="warn" mat-icon-button (click)="removeModuleSkill(i, j)">
+                  <mat-icon aria-label="Delete skill">delete</mat-icon>
+                </button>
+              </div>
+
+            </ng-container>
+            <div class="module-skill add" (click)="addModuleSkillGroup(i)">
+              <span>+</span>
+              <h4>Добавить скилл</h4>
+            </div>
+          </div>
+
+
+
+          <button class="delete-module" type="button" color="warn" mat-stroked-button (click)="removeModule(i)">УДАЛИТЬ
+            МОДУЛЬ</button>
+        </div>
+      </ng-container>
+      <div class="module add" (click)="addModule()" #modulesContainer>
+        <span>+</span>
+        <h4>Добавить</h4>
+      </div>
+    </div>
+
+    <h2>Практики</h2>
+    <div formArrayName="practices" class="practices" #practicesContainer>
+      <ng-container *ngFor="let item of form.get('practices')['controls'];let i = index;">
+        <div [formGroupName]="i" class="practice" [id]="i" @fadeInOut>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Название практики" formControlName="name">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Год обучения (курс)" formControlName="year">
+              <mat-option value="1">
+                1
+              </mat-option>
+              <mat-option value="2">
+                2
+              </mat-option>
+              <mat-option value="3">
+                3
+              </mat-option>
+              <mat-option value="4">
+                4
+              </mat-option>
+              <mat-option value="5">
+                5
+              </mat-option>
+              <mat-option value="6">
+                6
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button type="button" color="warn" mat-stroked-button (click)="removePractice(i)">УДАЛИТЬ</button>
+        </div>
+      </ng-container>
+      <div class="practice add" (click)="addPractice()">
+        <span>+</span>
+        <h4>Добавить</h4>
+      </div>
+    </div>
+
+
+    <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid" style="margin-top: 15px">Сохранить
+      изменения</button>
+  </form>
+</ng-container>
+
+
+<ng-template #info>
+  <div class="info @fadeInOut">
+    <ng-container *ngIf="!form || (sending && !sent)">
+      <mat-spinner></mat-spinner>
+    </ng-container>
+
+    <ng-container *ngIf="sent && !sending && !errored">
+      <h3>Программа сохранена!</h3>
+      <a mat-raised-button color="primary" routerLink="../">ОК</a>
+    </ng-container>
+
+    <ng-container *ngIf="errored && error">
+      <h3>Произошла ошибка при сохранении!</h3>
+      <pre>{{ error }}</pre>
+    </ng-container>
+  </div>
+</ng-template>

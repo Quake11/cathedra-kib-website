@@ -1,0 +1,27 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!(schedules$ | async)"></mat-progress-bar>
+<div *ngIf="schedules$ | async as schedules">
+  <div class="headline">
+    <h2 class="mat-headline">
+      Расписание
+    </h2>
+    <ng-container *ngIf="(user$ | async) === null">
+      <button mat-icon-button>
+        <mat-icon matTooltip="Необходимо войти на сайт для получения уведомлений" (click)="openLoginDialog()" class="notify">notifications_outline</mat-icon>
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="user$ | async as user">
+      <button mat-icon-button (click)="subscribeToSchedules(user)" *ngIf="(isSubbedToSchedules$ | async) === false">
+        <mat-icon matTooltip="Уведомлять о новых расписаниях" class="notify">notifications_outline</mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="cancelSubToSchedules(user)" *ngIf="(isSubbedToSchedules$ | async) === true">
+        <mat-icon matTooltip="Отключить уведомления о новых расписаниях" class="stop-notify">notifications_active_outline</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+
+  <div class="items-wrapper" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg" ngClass.xl="xl">
+    <app-schedule-item [item]="scheduleItem" *ngFor="let scheduleItem of schedules; trackBy: scheduleItem?.id"></app-schedule-item>
+  </div>
+</div>

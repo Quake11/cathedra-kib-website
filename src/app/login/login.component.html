@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <div *ngIf="user$ | async; then authenticated else guest">
+    <!-- template will replace this div -->
+  </div>
+</div>
+
+
+<ng-template #guest>
+  <h2 class="mat-headline" style="text-align: center;">Авторизация</h2>
+  <div class="auth">
+    <button mat-raised-button style="background-color:#ff8100;color:white;width:120px;" (click)="smsLogin()">
+      <i class="far fa-envelope"></i> SMS
+    </button>
+    <button mat-raised-button style="background-color:#ea4335;color:white;" (click)="googleLogin()">
+      <i class="fab fa-google-plus-g"></i> Google
+    </button>
+  </div>
+  <img src="assets/security.svg" @fade>
+</ng-template>
+
+<ng-template #authenticated>
+  <h2 class="mat-headline" style="text-align: center;">Вы авторизованы</h2>
+  <div style="display: flex;justify-content: space-between;width: 200px;align-items: center;text-align: center;">
+    <button mat-button routerLink="/">Назад</button>
+    <button mat-stroked-button color="warn" (click)="signOut()">Выход</button>
+  </div>
+  <img src="assets/confirmed.svg" @fade>
+</ng-template>

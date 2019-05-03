@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <mat-progress-bar mode="indeterminate" *ngIf="(news$ | async) === null"></mat-progress-bar>
+
+  <div style="width: 100%;display: flex;justify-content: flex-end;margin-bottom: 25px;">
+    <a mat-raised-button color="primary" routerLink="create">
+      + Новость
+    </a>
+  </div>
+
+  <h3 class="mat-title" *ngIf="(news$ | async)?.length <= 0">Нет новостей</h3>
+
+  <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport" *ngIf="news$ | async as news">
+    <div class="news-items-wrapper">
+      <app-admin-news-item [item]="newsItem" *ngFor="let newsItem of news; trackBy: trackById"></app-admin-news-item>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+</div>

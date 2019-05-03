@@ -1,0 +1,67 @@
+<div class="header-wrapper">
+  <h1 class="mat-display-1" style="margin-top: 20px;margin-bottom: 10px !important;">
+    Кафедра Информационной Безопасности
+  </h1>
+  <h3 class="mat-subheading-2">
+    Института точных наук и информационных технологий Сыктывкарского
+    госуниверситета
+  </h3>
+</div>
+
+<div class="avatars">
+  <a class="avatar-wrapper" routerLink="enrollee">
+    <svg height="200" width="200">
+      <circle cx="100" cy="100" r="90" stroke="#4956c7" />
+      <image xlink:href="assets/home/avatars/boy-4.svg" x="50%" y="50%" height="200" width="150" transform="translate(-75,-100)" />
+    </svg>
+
+    <h2 class="mat-title">Абитуриенту</h2>
+  </a>
+
+  <a class="avatar-wrapper" routerLink="student">
+    <svg height="200" width="200">
+      <circle cx="100" cy="100" r="90" stroke="#4956c7" />
+      <image xlink:href="assets/home/avatars/student.svg" x="50%" y="50%" height="200" width="150" transform="translate(-75,-100)" />
+    </svg>
+    <h2 class="mat-title">Студенту</h2>
+  </a>
+
+  <a class="avatar-wrapper" routerLink="admin">
+    <svg height="200" width="200">
+      <circle cx="100" cy="100" r="90" stroke="#4956c7" />
+      <image xlink:href="assets/home/avatars/businessman-1.svg" x="50%" y="50%" height="200" width="150" transform="translate(-75,-100)" />
+    </svg>
+    <h2 class="mat-title">Преподавателю</h2>
+  </a>
+</div>
+
+<app-news></app-news>
+
+<div class="navigation">
+  <figure>
+    <a routerLink="/student/schedule">
+      <img src="assets/home/schedule.svg" alt="Расписание">
+      <figcaption>
+        <h2 class="mat-title">Расписание</h2>
+      </figcaption>
+    </a>
+  </figure>
+
+  <figure>
+    <a routerLink="/student/sessions">
+      <img src="assets/home/sessions.svg" alt="Сессии">
+      <figcaption>
+        <h2 class="mat-title">Сессии</h2>
+      </figcaption>
+    </a>
+  </figure>
+
+  <figure>
+    <a routerLink="/student/events">
+      <img src="assets/home/events.svg" alt="Календарь событий">
+      <figcaption>
+        <h2 class="mat-title">Календарь событий</h2>
+      </figcaption>
+    </a>
+  </figure>
+</div>

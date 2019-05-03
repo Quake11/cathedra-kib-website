@@ -1,0 +1,11 @@
+<h2 class="mat-display-2">
+  Нам помогают в трудоустройстве выпускников:
+</h2>
+<p-carousel [value]="items" circular="circular" autoplayInterval="8000" styleClass="carousel" numVisible="4">
+  <ng-template let-item pTemplate="item">
+    <div class="company">
+      <img class="logo" [src]="item.img" />
+      <h3 class="mat-h3 name">{{ item.name }}</h3>
+    </div>
+  </ng-template>
+</p-carousel>

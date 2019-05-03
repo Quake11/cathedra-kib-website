@@ -1,0 +1,49 @@
+<div class="title">
+  <h2 class="mat-display-2 screen-title" *ngIf="!sent">
+    Остались вопросы?
+  </h2>
+
+  <h2 class="mat-display-2 screen-title" *ngIf="sent">
+    Спасибо за вопрос!
+  </h2>
+</div>
+<form (ngSubmit)="submitFeedbackForm(feedbackForm.value)" #feedbackForm="ngForm" *ngIf="!sent && !sending">
+
+  <mat-form-field appearance="standard" style="width: 400px;">
+    <mat-label class="label">Задай вопрос</mat-label>
+    <textarea name="question" style="min-height: 1.5rem;line-height: 1.5rem;" ngModel matInput matTextareaAutosize
+      required></textarea>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="standard">
+    <mat-label class="label">Твоё имя</mat-label>
+    <input name="name" ngModel matInput type="text" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label class="label">Телефон или email</mat-label>
+    <input name="contact" ngModel matInput type="text" required>
+  </mat-form-field>
+
+
+
+  <button mat-flat-button style="margin-top: 25px;" type="submit" color="accent" [disabled]="!feedbackForm.valid">Отправить</button>
+
+  <p class="mat-caption privacy">
+    Нажимая на кнопку "Отправить", вы даете согласие на обработку своих персональных данных и соглашаюсь с
+    <a routerLink="/privacy">Политикой конфидециальности.</a>
+  </p>
+
+</form>
+
+<div class="sent" *ngIf="sent || sending">
+  <h3 class="mat-h3" *ngIf="sent">Ваш вопрос отправлен.</h3>
+  <div class="circle-loader" [ngClass]="{'load-complete': sent && !sending}">
+    <div class="checkmark draw" *ngIf="sent"></div>
+  </div>
+
+  <button mat-raised-button type="button" *ngIf="sent" (click)="reset()">
+    Написать ещё раз
+  </button>
+</div>

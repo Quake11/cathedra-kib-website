@@ -1,0 +1,8 @@
+<h2 class="mat-headline" style="text-align: center;margin: 15px;">Управление сайтом</h2>
+<nav mat-tab-nav-bar>
+  <a mat-tab-link *ngFor="let tab of navLinks" [routerLink]="[tab.path]" routerLinkActive #rla="routerLinkActive"
+    [routerLinkActiveOptions]="{exact: true}" [active]="rla.isActive">
+    {{ tab.label }}
+  </a>
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,49 @@
+.wrapper {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  border-radius: 5px;
+
+  &.xs .profile button {
+    padding: 0 5px;
+  }
+}
+
+.avatar-wrapper {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background: white;
+  overflow: hidden;
+  flex: 0 0 32px;
+  margin: 5px 3px;
+  cursor: pointer;
+  outline: none;
+
+  img {
+    outline: none;
+    max-height: 100%;
+  }
+}
+
+.profile {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  .name-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    .profile-name {
+      text-align: center;
+      white-space: normal;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5rem;
+      margin: 10px 0;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+}

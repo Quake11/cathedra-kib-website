@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <span>
+    {{ (group$ | async)?.name }} - {{ types[exam.type] }} по {{ exam.subject }}
+    <span *ngIf="formattedDate">({{ formattedDate }})</span>
+  </span>
+  <button mat-stroked-button color="warn" appHoldable (holdTime)="deleteExam($event, exam.uid)">Удалить</button>
+</div>
+
+<mat-progress-bar *ngIf="progress" color="warn" mode="determinate" [value]="progress">
+</mat-progress-bar>

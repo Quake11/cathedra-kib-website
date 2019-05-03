@@ -1,0 +1,10 @@
+:host {
+  .wrapper {
+    padding: 15px;
+
+    .event-items-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

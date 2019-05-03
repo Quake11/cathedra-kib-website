@@ -1,0 +1,48 @@
+<ng-container *ngIf="fake then fakeItem else realItem"></ng-container>
+
+<ng-template #realItem>
+  <div class="wrapper" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg" ngClass.xl="xl">
+    <a [routerLink]="'/news/' + item.id" class="title">
+      {{ item.title }}
+    </a>
+
+    <p class="mat-caption date">
+      {{ getDate(item.publicationDate) }}
+    </p>
+
+    <p class="mat-body-1" class="announcement" [innerHTML]="item.announcement">
+    </p>
+
+    <div class="read">
+      <a [routerLink]="'/news/' + item.id">
+        Читать далее
+      </a>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<ng-template #fakeItem>
+  <div class="wrapper fake" ngClass.xs="xs" ngClass.sm="sm" ngClass.md="md" ngClass.lg="lg" ngClass.xl="xl">
+    <a class="title">
+      &zwnj;
+    </a>
+
+    <p class="mat-caption date">
+      &zwnj;
+    </p>
+
+    <div class="mat-body-1" class="announcement">
+      <p>&zwnj;</p>
+      <p>&zwnj;</p>
+      <p>&zwnj;</p>
+    </div>
+
+    <div class="read">
+      <a>
+        &zwnj;
+      </a>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,101 @@
+<div class="wrapper">
+
+  <ng-container *ngIf="eventAdded; then prompt else form">
+  </ng-container>
+
+  <ng-template #prompt>
+    <div class="event-added">
+      <h3 class="mat-title">Событие добавлено! <mat-icon>done</mat-icon>
+      </h3>
+      <div class="buttons">
+        <button (click)="createAgain()" type="button" mat-raised-button color="primary">Добавить ещё</button>
+        <a mat-stroked-button color="primary" [routerLink]="'/student'">Посмотреть событие</a>
+      </div>
+
+      <a mat-button color="primary" routerLink=".." style="margin-top: 25px;">Вернуться к списку событий</a>
+    </div>
+
+  </ng-template>
+
+  <ng-template #form>
+    <form (ngSubmit)="onSubmit()" [formGroup]="eventForm">
+      <mat-form-field>
+        <mat-label>Название</mat-label>
+        <input matInput formControlName="title" [readonly]="eventAdding">
+      </mat-form-field>
+
+      <div>
+        <mat-form-field>
+          <input matInput formControlName="startDate" (focus)="startDatePicker.open()" [readonly]="eventAdding"
+            [matDatepicker]="startDatePicker" placeholder="Дата начала">
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <div style="display: flex">
+            <input matInput [ngxTimepicker]="startTimePicker" [format]="24" formControlName="startTime" [readonly]="eventAdding"
+              placeholder="Время начала">
+
+            <button type="button" class="icon-button" mat-icon-button (click)="startTimePicker.open()">
+              <mat-icon matSuffix ngxMaterialTimepickerToggleIcon>access_time</mat-icon>
+            </button>
+          </div>
+        </mat-form-field>
+
+        <ngx-material-timepicker #startTimePicker [minutesGap]="5" [cancelBtnTmpl]="cancelBtnTemplate" [confirmBtnTmpl]="confirmBtnTemplate"></ngx-material-timepicker>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input matInput formControlName="endDate" (click)="endDatePicker.open()" [readonly]="eventAdding"
+            [matDatepicker]="endDatePicker" placeholder="Дата окончания">
+          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <div style="display: flex">
+            <input matInput [ngxTimepicker]="endTimePicker" [format]="24" formControlName="endTime" [readonly]="eventAdding"
+              placeholder="Время окончания">
+
+            <button type="button" class="icon-button" mat-icon-button (click)="endTimePicker.open()">
+              <mat-icon matSuffix ngxMaterialTimepickerToggleIcon>access_time</mat-icon>
+            </button>
+          </div>
+        </mat-form-field>
+
+        <ngx-material-timepicker #endTimePicker [minutesGap]="5" [cancelBtnTmpl]="cancelBtnTemplate" [confirmBtnTmpl]="confirmBtnTemplate"></ngx-material-timepicker>
+      </div>
+
+      <ng-template #cancelBtnTemplate>
+        <button type="button" mat-button style="margin-right: 25px;">Отмена</button>
+      </ng-template>
+      <ng-template #confirmBtnTemplate>
+        <button type="button" mat-stroked-button color="primary">ОК</button>
+      </ng-template>
+
+      <mat-checkbox color="primary" formControlName="allDay">Весь день</mat-checkbox>
+
+      <mat-form-field>
+        <mat-label>Цвет</mat-label>
+        <input matInput formControlName="color" [readonly]="eventAdding">
+      </mat-form-field>
+
+      <app-ngx-editor placeholder="Описание" [spellcheck]="true" formControlName="description" height="200px"
+        [editable]="!eventAdding"></app-ngx-editor>
+
+      <mat-progress-bar mode="query" *ngIf="eventAdding"></mat-progress-bar>
+
+      <div class="controls">
+        <a mat-button [routerLink]="eventAdding ? null : '..'" [disabled]="eventAdding">
+          Назад
+        </a>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!eventForm.valid || eventAdding">
+          Опубликовать событие
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</div>

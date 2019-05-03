@@ -1,0 +1,56 @@
+<ng-container *ngIf="notEmpty">
+  <div class="wrapper">
+    <ng-container *ngFor="let examsType of examsList | keyvalue">
+      <div [ngSwitch]="examsType.key" class="exams">
+        <ng-container *ngSwitchCase="'exam'">
+          <ng-container *ngIf="examsType.value.length > 0">
+            <h3>Экзамены: </h3>
+            <ul>
+              <li *ngFor="let exam of examsType.value">
+                {{ exam.subject}} <span *ngIf="exam.date">({{ exam.date }})</span>
+              </li>
+            </ul>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'zachet'">
+          <ng-container *ngIf="examsType.value.length > 0">
+            <h3>Зачеты: </h3>
+            <ul>
+              <li *ngFor="let exam of examsType.value">
+                {{ exam.subject}} <span *ngIf="exam.date">({{ exam.date }})</span>
+              </li>
+            </ul>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'courseWork'">
+          <ng-container *ngIf="examsType.value.length > 0">
+            <h3>Курсовые: </h3>
+            <ul>
+              <li *ngFor="let exam of examsType.value">
+                {{ exam.subject}} <span *ngIf="exam.date">({{ exam.date }})</span>
+              </li>
+            </ul>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'practice'">
+          <ng-container *ngIf="examsType.value.length > 0">
+            <h3>Практика: </h3>
+            <ul>
+              <li *ngFor="let exam of examsType.value">
+                {{ exam.subject}} <span *ngIf="exam.date">({{ exam.date }})</span>
+              </li>
+            </ul>
+          </ng-container>
+        </ng-container>
+
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!notEmpty">
+  <h3><i style="font-weight: 400;">Пока нет информации об экзаменах для этой группы</i></h3>
+</ng-container>

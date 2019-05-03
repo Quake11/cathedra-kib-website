@@ -1,0 +1,264 @@
+:host {
+  width: 100%;
+
+  h2 {
+    text-align: center;
+    margin: 50px 0 25px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+
+    .form-program-with-preview {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      width: 100%;
+    }
+
+    mat-form-field,
+    .cp,
+    app-file-upload {
+      width: 100%;
+      max-width: 90vw;
+      margin: 5px;
+    }
+
+    .cp {
+      margin-bottom: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+
+      input {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+
+    .skills {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 85vw;
+
+      h3 {
+        text-align: center;
+      }
+
+      .skill {
+        display: flex;
+        flex-direction: column;
+        padding: 5px 15px;
+        margin: 5px;
+        width: 300px;
+        max-width: 90vw;
+
+        &.add {
+          text-align: center;
+          height: 320px;
+          display: flex;
+          justify-content: center;
+          cursor: pointer;
+
+          span {
+            font-size: 3.5rem;
+          }
+
+          h4 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+            font-weight: 400;
+          }
+        }
+      }
+
+      .hard .skill {
+        border: 3px solid rgba(101, 115, 234, 0.5);
+
+        &.add {
+          background: #b2b9f41f;
+
+          &:hover {
+            background: #5769ff1f;
+          }
+        }
+      }
+
+      .soft .skill {
+        border: 3px solid rgba(194, 56, 10, .5);
+
+        &.add {
+          background: #fff0ec;
+
+          &:hover {
+            background: #fbd0c5;
+          }
+        }
+      }
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+mat-form-field {
+  margin-bottom: 0;
+}
+
+
+.preview {
+  width: 600px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skills-preview {
+  width: 450px;
+  max-width: 90vw;
+}
+
+
+.modules {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .module {
+    border: 3px solid #8715cee8;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    max-width: 90vw;
+
+    button.delete-module {
+      margin-top: 15px;
+      height: 75px;
+    }
+
+    &.add {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 300px;
+      justify-content: center;
+      cursor: pointer;
+      background: #bfc0ec1c;
+      border: 1px solid #922ad26e;
+
+      span {
+        font-size: 4.5rem;
+      }
+
+      h4 {
+        font-size: 1.8rem;
+      }
+
+      &:hover {
+        background: #bfc0ec52;
+      }
+    }
+
+    .module-skills {
+      border: 1px solid #8715ce73;
+      padding: 5px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .module-skill {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 300px;
+        max-width: 100%;
+
+        &.add {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          height: 100px;
+          justify-content: center;
+          cursor: pointer;
+          background: #bfc0ec1c;
+          border: 1px solid #922ad26e;
+          margin-top: auto;
+
+          span {
+            font-size: 3.5rem;
+          }
+
+          h4 {
+            margin: 5px 0;
+          }
+
+          &:hover {
+            background: #6a6dec24;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.practices {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+  .practice {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(83, 99, 232, 0.3);
+    padding: 15px;
+    margin: 5px;
+    border-radius: 3px;
+    flex-basis: 400px;
+    max-width: 90vw;
+    flex-grow: 1;
+
+    &.add {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      background: #99b2e212;
+      width: 100%;
+      font-size: 1.5rem;
+      height: 250px;
+
+      span {
+        font-size: 3.5rem;
+      }
+
+      h4 {
+        margin: 15px 0 5px;
+      }
+
+      &:hover {
+        background: #2f63ca26;
+      }
+    }
+  }
+}

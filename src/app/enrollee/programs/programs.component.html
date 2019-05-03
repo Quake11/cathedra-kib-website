@@ -1,0 +1,48 @@
+<h2 class="mat-display-2 screen-title">
+  Программы обучения
+</h2>
+
+<div class="programs" *ngIf="programs$ | async as programs">
+  <a *ngFor="let program of programs" class="program" [routerLink]="'/programs/' + program.id" [style.background]="program.backgroundColor  | safe: 'style'">
+    <img *ngIf="program.imgLogo" [src]="program.imgLogo?.url">
+    <div class="text" [style.color]="program.fontColor">
+      <h3 *ngIf="program.name">{{ program.name }}</h3>
+      <h4 *ngIf="program.graduation">{{ program.graduation }}</h4>
+      <h4 *ngIf="program.subtitle">Бюджетных мест на {{ year }} год: {{ program.places }}</h4>
+    </div>
+  </a>
+</div>
+
+<!--
+<div class="cards" *ngIf="programs$ | async as programs">
+  <mat-card *ngFor="let program of programs">
+    <img mat-card-image [src]="program.imgCover">
+    <mat-card-title>
+      {{ program.graduation }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ program.name }}
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p class="mat-body-2">Вступительные испытания (по приоритету):</p>
+      <ul>
+        <li><strong>Математика</strong>;</li>
+        <li>Русский язык;</li>
+        <li>Физика.</li>
+      </ul>
+
+      <p class="mat-body-2">Продолжение обучения (Магистратура):</p>
+      <ul style="list-style: circle">
+        <li>Физика;</li>
+        <li>Математика и компьютерные науки;</li>
+        <li>Бизнес-информатика;</li>
+        <li>Прикладная информатика.</li>
+      </ul>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <a mat-raised-button color="accent" [routerLink]="'/programs/' + program.id">Узнать больше</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
+ -->

@@ -1,0 +1,25 @@
+.wrapper {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+
+  .name {
+    margin: 10px 0 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .avatar {
+    max-height: 100px;
+  }
+
+  mat-chip-list {
+    margin: 15px;
+  }
+}
